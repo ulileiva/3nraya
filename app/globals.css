@@ -10,6 +10,9 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  .font-patrick {
+    font-family: "Patrick Hand";
+  }
 }
 
 @layer base {
