@@ -11,6 +11,8 @@ type WinLine = {
   color: string
 } | null
 
+let countGames = 1;
+
 const TresEnRaya = () => {
   const [squares, setSquares] = useState<SquareValue[]>(Array(9).fill(null))
   const [xIsNext, setXIsNext] = useState(true)
@@ -39,7 +41,8 @@ const TresEnRaya = () => {
   const resetGame = () => {
     setSquares(Array(9).fill(null))
     setWinLine(null)
-    setXIsNext(true)
+    setXIsNext(countGames % 2 === 0)
+    countGames++
   }
 
   const [winner] = calculateWinner(squares)
