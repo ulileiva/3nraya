@@ -11,6 +11,7 @@ interface GameContextType {
   resetGame: () => void;
   undoLastMove: () => void;
   canUndo: boolean;
+  isDraw: boolean;
 }
 
 export const GameContext = createContext<GameContextType | undefined>(

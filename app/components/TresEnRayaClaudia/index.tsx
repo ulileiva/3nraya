@@ -1,7 +1,7 @@
-import { useGame } from './GameContext';
+import { useGame } from '../TresEnRaya/GameContext';
 import { Squares } from './Squares';
 import { Button } from '@/components/Button';
-import { Lines } from './Lines';
+import { Lines } from '../TresEnRaya/Lines';
 import { Info } from './Info';
 import { Score } from './Score';
 

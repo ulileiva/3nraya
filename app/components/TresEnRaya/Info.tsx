@@ -3,7 +3,7 @@ import { useGame } from './GameContext';
 import { fontVariant } from './styles';
 
 export const Info = () => {
-  const { winner, squares, xIsNext } = useGame();
+  const { winner, xIsNext, isDraw } = useGame();
 
   if (winner) {
     return (
@@ -21,7 +21,7 @@ export const Info = () => {
     );
   }
 
-  if (squares.every((square) => square !== null)) {
+  if (isDraw) {
     return (
       <p className="h-10">
         Empate<span className="text-4xl"></span>

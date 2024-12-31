@@ -78,6 +78,7 @@ export const GameProvider = ({ children }: Props) => {
         resetGame,
         undoLastMove,
         canUndo: currentMove > 0 && !winner,
+        isDraw: squares.every((square) => square !== null),
       }}
     >
       {children}
