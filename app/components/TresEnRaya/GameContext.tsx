@@ -9,6 +9,8 @@ interface GameContextType {
   scores: { X: number; O: number };
   handleClick: (i: number) => void;
   resetGame: () => void;
+  undoLastMove: () => void;
+  canUndo: boolean;
 }
 
 export const GameContext = createContext<GameContextType | undefined>(

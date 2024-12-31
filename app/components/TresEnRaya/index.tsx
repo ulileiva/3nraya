@@ -6,7 +6,7 @@ import { Info } from './Info';
 import { Score } from './Score';
 
 export const TresEnRaya = () => {
-  const { resetGame } = useGame();
+  const { resetGame, undoLastMove, canUndo, winner } = useGame();
 
   return (
     <div className="flex flex-col items-center justify-center mt-10 gap-5 text-2xl font-semibold">
@@ -16,7 +16,14 @@ export const TresEnRaya = () => {
         <Lines />
         <Squares />
       </div>
-      <Button onClick={resetGame}>Reiniciar</Button>
+      <div className="flex gap-4">
+        <Button onClick={resetGame} variant={winner ? 'default' : 'outline'}>
+          Nueva partida
+        </Button>
+        <Button onClick={undoLastMove} variant="secondary" disabled={!canUndo}>
+          Deshacer
+        </Button>
+      </div>
     </div>
   );
 };

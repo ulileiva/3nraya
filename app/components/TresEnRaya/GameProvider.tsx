@@ -6,15 +6,18 @@ type Props = {
   children: ReactNode;
 };
 
+const initialSquares = Array(9).fill(null);
 const xColor = '#2563eb';
 const oColor = '#dc2626';
 let countGames = 1;
 
 export const GameProvider = ({ children }: Props) => {
-  const [squares, setSquares] = useState<SquareValue[]>(Array(9).fill(null));
+  const [squares, setSquares] = useState<SquareValue[]>(initialSquares);
   const [xIsNext, setXIsNext] = useState(true);
   const [winLine, setWinLine] = useState<WinLine>(null);
   const [scores, setScores] = useState({ X: 0, O: 0 });
+  const [history, setHistory] = useState<SquareValue[][]>([initialSquares]);
+  const [currentMove, setCurrentMove] = useState(0);
 
   const handleClick = (i: number) => {
     if (calculateWinner(squares)[0] || squares[i]) {
@@ -25,6 +28,9 @@ export const GameProvider = ({ children }: Props) => {
     const currentPlayer = xIsNext ? 'X' : 'O';
     newSquares[i] = currentPlayer;
 
+    const newHistory = history.slice(0, currentMove + 1);
+    setHistory([...newHistory, newSquares]);
+    setCurrentMove(newHistory.length);
     setSquares(newSquares);
     setXIsNext(!xIsNext);
 
@@ -38,8 +44,21 @@ export const GameProvider = ({ children }: Props) => {
     }
   };
 
+  const undoLastMove = () => {
+    if (currentMove === 0) return;
+
+    const newMove = currentMove - 1;
+    const previousSquares = history[newMove];
+    setCurrentMove(newMove);
+    setSquares(previousSquares);
+    setXIsNext(!xIsNext);
+    setWinLine(null);
+  };
+
   const resetGame = () => {
-    setSquares(Array(9).fill(null));
+    setSquares(initialSquares);
+    setHistory([initialSquares]);
+    setCurrentMove(0);
     setWinLine(null);
     setXIsNext(countGames % 2 === 0);
     countGames++;
@@ -57,6 +76,8 @@ export const GameProvider = ({ children }: Props) => {
         scores,
         handleClick,
         resetGame,
+        undoLastMove,
+        canUndo: currentMove > 0 && !winner,
       }}
     >
       {children}
