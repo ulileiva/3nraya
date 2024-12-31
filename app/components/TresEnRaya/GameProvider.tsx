@@ -7,7 +7,7 @@ type Props = {
 };
 
 const initialSquares = Array(9).fill(null);
-const xColor = '#2563eb';
+const xColor = '#facc15';
 const oColor = '#dc2626';
 let countGames = 1;
 
