@@ -4,14 +4,18 @@ import { SquareValue, WinLine } from './types';
 
 type Props = {
   children: ReactNode;
+  xColor?: string;
+  oColor?: string;
 };
 
 const initialSquares = Array(9).fill(null);
-const xColor = '#facc15';
-const oColor = '#dc2626';
 let countGames = 1;
 
-export const GameProvider = ({ children }: Props) => {
+export const GameProvider = ({
+  children,
+  xColor = '#facc15',
+  oColor = '#dc2626',
+}: Props) => {
   const [squares, setSquares] = useState<SquareValue[]>(initialSquares);
   const [xIsNext, setXIsNext] = useState(true);
   const [winLine, setWinLine] = useState<WinLine>(null);
@@ -36,7 +40,7 @@ export const GameProvider = ({ children }: Props) => {
 
     const [winner, winningSquares] = calculateWinner(newSquares);
     if (winner && winningSquares) {
-      setWinLine(getWinLineCoordinates(winningSquares, winner));
+      setWinLine(getWinLineCoordinates(winningSquares, winner, xColor, oColor));
       setScores((prevScores) => ({
         ...prevScores,
         [winner]: prevScores[winner] + 1,
@@ -111,7 +115,9 @@ const calculateWinner = (
 
 const getWinLineCoordinates = (
   winningSquares: number[],
-  winner: SquareValue
+  winner: SquareValue,
+  xColor: string,
+  oColor: string
 ): WinLine => {
   const positions = [
     [16.5, 16.5], // Casilla 0

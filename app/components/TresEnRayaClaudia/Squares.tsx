@@ -16,7 +16,7 @@ export const Squares = () => {
           {square && (
             <img
               src={`/${square === 'X' ? 'claudia' : 'paula'}.png`}
-              className="max-w-[90%] max-h-[70%]"
+              className="max-w-[90%] max-h-[70%] z-[-1]"
             />
           )}
         </button>
