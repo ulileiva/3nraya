@@ -1,10 +1,12 @@
-import TresEnRaya from './TresEnRaya'
+'use client';
 
-export default function Home() {
-  return (
-    <main>
-      <TresEnRaya />
-    </main>
-  )
-}
+import { GameProvider } from '@/components/TresEnRaya/GameProvider';
+import { TresEnRaya } from '@/components/TresEnRaya';
 
+const Home = () => (
+  <GameProvider>
+    <TresEnRaya />
+  </GameProvider>
+);
+
+export default Home;

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,8 +12,15 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
   .font-patrick {
-    font-family: "Patrick Hand";
+    font-family: 'Patrick Hand';
+  }
+
+  @keyframes drawLine {
+    to {
+      stroke-dashoffset: 0;
+    }
   }
 }
 
